@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+.sidebar {
+  width: 80px;
+  height: 100vh;
+  background: #1e2a44;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.sidebar i {
+  color: white;
+  font-size: 20px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+.topbar {
+  margin-left: 80px;
+  background: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.content {
+  margin-left: 80px;
+  padding: 20px;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+
+.tag {
+  background: #4ecdc4;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <i onclick="goPage('dashboard.html')">🏠</i>
+  <i onclick="goPage('notebooks.html')">📘</i>
+  <i onclick="goPage('tasks.html')">📂</i>
+  <i onclick="goPage('profile.html')">👤</i>
+  <i onclick="goPage('index.html')">🚪</i>
+</div>
+
+<div class="topbar">
+  <h5>DASHBOARD</h5>
+  <span id="studentName">Student</span>
+</div>
+
+<div class="content">
+  <h4>Information and Communications Technology</h4>
+  <p><b>The Curriculum</b></p>
+
+  <div class="row" id="curriculumContainer"></div>
+</div>
+
+<script>
+let student = "Student";
+
+let curriculum = [
+  {
+    quarter: "1st Quarter",
+    topics: ["Introduction to HTML", "Basic CSS Styling", "Quarter Project"]
+  },
+  {
+    quarter: "2nd Quarter",
+    topics: ["Introduction to Bootstrap", "Forms", "Quarter Project"]
+  },
+  {
+    quarter: "3rd Quarter",
+    topics: ["JavaScript Basics", "Variables & Operators", "Functions", "Quarter Project"]
+  },
+  {
+    quarter: "4th Quarter",
+    topics: ["Conditional Statements", "Loops", "Quarter Project"]
+  }
+];
+
+function loadCurriculum() {
+  let container = document.getElementById("curriculumContainer");
+
+  for (let i = 0; i < curriculum.length; i++) {
+    let q = curriculum[i];
+
+    let topicsHTML = "";
+    
+    for (let j = 0; j < q.topics.length; j++) {
+      topicsHTML += `<li>${q.topics[j]}</li>`;
+    }
+
+    container.innerHTML += `
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <p><span class="tag">${q.quarter}</span></p>
+          <ul>${topicsHTML}</ul>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function goPage(page) {
+  window.location.href = page;
+}
+
+document.getElementById("studentName").innerHTML = student;
+console.log("Quarters:", curriculum.length);
+
+loadCurriculum();
+</script>
+
+
+</body>
+</html>
